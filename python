@@ -1,0 +1,56 @@
+import random
+Woorden = ["informatica", "informatiekunde", "spelletje", "aardigheidje", "scholier", "fotografie", "waardebepaling", "specialiteit", "verzekering", "universiteit", "heesterperk"]
+print("Hey, welcome to hangman")
+print("We'll give you a blank word and you have to guess the word by guessing letters of the word")
+print("But if you put in a wrong letter a part of the hangman will start to appear")
+print("if the hangman is done you lose, if you guess the word you win!")
+beurten = 5
+woord = (random.choice(Woorden))
+i = len(woord)
+print("_" * len(woord))
+
+streep = ["_"] * len(woord)
+streep = "".join(streep)
+
+print(i)
+print(woord)
+while beurten > 0:
+ 
+ gok = input()
+ gok2 = gok
+ if gok.isalpha() == True:
+  if len(gok) == 1:
+    if gok in woord:
+      streep = list(streep)
+      streep[woord.index(gok)] = gok
+      plaats = woord.find(gok) 
+      if woord.count(gok) > 1:
+        gok = gok2
+        idx = woord.find(str(gok),  plaats + 1 ,len(woord))
+        streep[idx] = gok
+        if woord.count(gok) > 2:
+          plaats2 = woord.find(str(gok),  plaats + 1 ,len(woord))
+          indxx = woord.find(str(gok),plaats2 + 1, len(woord) )
+          streep[indxx] = gok
+          if woord.count(gok) > 3:
+            plaats3 = woord.find(gok,plaats2 + 1, len(woord) )
+            indxxx = woord.find(gok,plaats3 + 1, len(woord) )
+            streep[indxxx] = gok
+      streep = "".join(streep)
+    else:
+      print("fout")
+      beurten -=1
+  else:
+    print("error one letter at a time")
+ if streep == woord:
+  beurten = -1
+
+    
+ print(streep)
+ if gok.isalpha() != True:
+  print("error not a letter")
+if beurten == 0:
+ print("game over")
+if beurten == -1:
+  print(" Good job, you've have guessed the word")
+  
